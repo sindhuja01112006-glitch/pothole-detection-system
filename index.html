@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pothole Management System</title>
+    <!-- Modern Web Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Dynamic Animated Background Shapes -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar glass-panel">
+            <div class="brand">
+                <span class="icon material-icons-outlined">satellite_alt</span>
+                <h2>Pothole AI</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-target="dashboard-view">
+                    <span class="material-icons-outlined">dashboard</span>
+                    Dashboard
+                </li>
+                <li data-target="report-view">
+                    <span class="material-icons-outlined">report_problem</span>
+                    Report Issue
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <!-- Dashboard View -->
+            <section id="dashboard-view" class="view active-view">
+                <header class="page-header">
+                    <div class="header-text">
+                        <h1>Dashboard</h1>
+                        <p>Real-time overview of mapped road hazards.</p>
+                    </div>
+                </header>
+                <div class="stats-cards">
+                    <div class="card glass-panel hover-lift">
+                        <div class="card-icon blue"><span class="material-icons-outlined">analytics</span></div>
+                        <div class="card-content">
+                            <h3>Total Reports</h3>
+                            <p id="total-reports" class="stat-number">0</p>
+                        </div>
+                    </div>
+                    <div class="card glass-panel hover-lift">
+                        <div class="card-icon red"><span class="material-icons-outlined">warning</span></div>
+                        <div class="card-content">
+                            <h3>High Severity</h3>
+                            <p id="high-severity" class="stat-number text-danger">0</p>
+                        </div>
+                    </div>
+                    <div class="card glass-panel hover-lift">
+                        <div class="card-icon green"><span class="material-icons-outlined">check_circle</span></div>
+                        <div class="card-content">
+                            <h3>Resolved</h3>
+                            <p id="resolved-issues" class="stat-number text-success">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-wrapper glass-panel hover-lift">
+                    <div class="map-header">
+                        <h2>Hazard Map</h2>
+                    </div>
+                    <div class="map-container">
+                        <div id="pothole-map"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Report View -->
+            <section id="report-view" class="view">
+                <header class="page-header">
+                    <div class="header-text">
+                        <h1>Report a Pothole</h1>
+                        <p>Help us identify and fix road hazards quickly.</p>
+                    </div>
+                </header>
+                <div class="form-container glass-panel hover-lift">
+                    <form id="report-form">
+                        <div class="form-group">
+                            <label for="image-upload" class="form-label">Upload an Image</label>
+                            <label class="file-drop-zone" for="image-upload" id="drop-zone-label">
+                                <span class="material-icons-outlined drop-icon">cloud_upload</span>
+                                <span>Click to select or drag & drop image</span>
+                            </label>
+                            <input type="file" id="image-upload" name="image" accept="image/*" class="hidden" required>
+                            <img id="image-preview" src="" alt="Preview" class="hidden">
+                        </div>
+
+                        <div class="location-group">
+                            <button type="button" id="get-location-btn" class="btn outline-btn">
+                                <span class="material-icons-outlined">my_location</span> Get Current Location
+                            </button>
+                            <div class="coords glass-badge">
+                                <span id="lat-display">Lat: -</span> <span class="divider">|</span> <span id="lng-display">Lng: -</span>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="latitude" name="latitude">
+                        <input type="hidden" id="longitude" name="longitude">
+
+                        <button type="submit" id="submit-btn" class="btn submit-btn" disabled>
+                            <span class="material-icons-outlined">send</span> Submit Report
+                        </button>
+                        <p id="submission-status"></p>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
